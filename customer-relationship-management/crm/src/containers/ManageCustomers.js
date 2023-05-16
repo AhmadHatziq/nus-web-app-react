@@ -35,7 +35,7 @@ function ManageCustomer() {
     }
 
     // Do a GET request to obtain details regarding the specified user & set the form fields 
-    const setCustomerEditData = async(id) => {
+    const setCustomerEditData = async() => {
       try {
         const customer = await getSingleCustomer(id)
         // console.log("Received customerData from backend: ", customer)
@@ -50,9 +50,9 @@ function ManageCustomer() {
       }
     }
 
-    setCustomerEditData(id)
+    setCustomerEditData()
 
-  }, [])
+  }, [id])
 
   // Validates the input for each form field 
   function validate() {
@@ -81,50 +81,50 @@ function ManageCustomer() {
     e.preventDefault();
     console.log("Form variables are: ", name, gender, address, phone)
 
-    // Clear the form fields 
-    setName("")
-    setGender("")
-    setAddress("")
-    setPhone("")
-
     if (validate()) {
-        if (id === 0) {
 
-            // Add a new customer 
-            const newCustomer = {
-              name, gender, address, phone
-            }
-            const response = await createNewCustomer(newCustomer)
+      // Clear the form fields if validated
+      setName("")
+      setGender("")
+      setAddress("")
+      setPhone("")
 
-            // If success, redirect user to the customer list 
-            if (response.ok) {
-              alert('Customer successfully added to the bottom of the list')
-              navigate('/customers');
-            } else {
-              alert('Error in creating new customer. Please try again')
-            }
-            
-        } else {
+      if (id === 0) {
 
-            // EDIT an existing customer 
-            const editedCustomer = {
-              name, gender, address, phone, id
-            }
-            const response = await putExistingCustomer(editedCustomer)
+          // Add a new customer 
+          const newCustomer = {
+            name, gender, address, phone
+          }
+          const response = await createNewCustomer(newCustomer)
 
-            // If success, redirect user to the customer list 
-            if (response.ok) {
-              alert('Customer successfully edited')
-              navigate('/customers');
-            } else {
-              alert('Error in creating new customer. Please try again')
-            }
+          // If success, redirect user to the customer list 
+          if (response.ok) {
+            alert('Customer successfully added to the bottom of the list')
+            navigate('/customers');
+          } else {
+            alert('Error in creating new customer. Please try again')
+          }
+          
+      } else {
 
-        }
-    } //end if
+          // EDIT an existing customer 
+          const editedCustomer = {
+            name, gender, address, phone, id
+          }
+          const response = await putExistingCustomer(editedCustomer)
 
+          // If success, redirect user to the customer list 
+          if (response.ok) {
+            alert('Customer successfully edited')
+            navigate('/customers');
+          } else {
+            alert('Error in creating new customer. Please try again')
+          }
 
-  }
+      }
+  } //end if
+
+  } // End of handleAddEditAction()
   return ( 
     <div className = "form-container" >
       <h1>{buttonLabel} Customer Details</h1>
