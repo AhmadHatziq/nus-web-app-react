@@ -1,13 +1,14 @@
-// import statements
-import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from 'react';
 import FormText from '../components/FormText'
 import FormSelect from '../components/FormSelect'
+import { createNewCustomer } from '../helpers/Api'
 
 function ManageCustomer() {
 
-  // used to capture id for edit case
+  // used to capture id for edit case. 
+  // id === 0 for add, else, id will be the ID of the person to be edited. 
   const {
       id = 0
   } = useParams();
@@ -15,71 +16,90 @@ function ManageCustomer() {
   // used for navigating to other pages after adding/editing
   // a record
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [gender, setGender] = useState("Male");
-
-  // TODO: define other state variables
+  const [name, setName] = useState("")
+  const [gender, setGender] = useState("")
+  const [address, setAddress] = useState("")
+  const [phone, setPhone] = useState("")
+  
 
   // define the buttonLabel
   const buttonLabel = id === 0 ? "Add" : "Edit";
 
-  // TODO: integrate with API
+  // Validates the input for each form field 
   function validate() {
       if (name.trim().length <= 0) {
-          alert("Please enter a name");
-          return false;
+        alert("Please enter a name");
+        return false;
       }
+      if (gender.trim().length <= 0) {
+        alert("Please select a gender");
+        return false;
+      }
+      if (address.trim().length <= 0) {
+        alert("Please enter an address");
+        return false;
+      }
+      if (phone.trim().length <= 0) {
+        alert("Please enter a phone number");
+        return false;
+      }
+      
       return true;
   }
 
-  function handleAddEditAction(e) {
-      e.preventDefault();
-      if (validate()) {
-          if (id === 0) {
+  async function handleAddEditAction(e) {
+      
+    e.preventDefault();
+    console.log("Form variables are: ", name, gender, address, phone)
 
-              // TODO: add case
+    // Clear the form fields 
+    setName("")
+    setGender("")
+    setAddress("")
+    setPhone("")
 
-          } else {
+    if (validate()) {
+        if (id === 0) {
 
-              // TODO: edit case
+            // Add a new customer 
+            const newCustomer = {
+              name, gender, address, phone
+            }
+            const response = await createNewCustomer(newCustomer)
 
-          }
-      } //end if
+            // If success, redirect user to the customer list 
+            if (response.ok) {
+              alert('Customer successfully added to the bottom of the list')
+              navigate('/customers');
+            } else {
+              alert('Error in creating new customer. Please try again')
+            }
+            
+        } else {
+
+            // TODO: edit case
+
+        }
+    } //end if
+
+
   }
   return ( 
     <div className = "form-container" >
-      <h1>ManageCustomer Component</h1>
-      
-      <form onSubmit = {
-          handleAddEditAction
-        } > {
-            /* TODO: complete the FormText and FormSelect
-              implementations */
-        } 
-      <FormText/>
-      <FormSelect
-        selectedValue = {
-            gender
-        }
-        onChange = {
-            (e) => setGender(e.target.value)
-        }
-      /> 
-      
-      <FormText/> 
-      <FormText/>
+      <h1>{buttonLabel} Customer Details</h1>
 
-      <div className = "row align-right" >
+      <form onSubmit={handleAddEditAction}>
+        <FormText label="Name*" fieldName="name" state={name} setState={setName}/>
+        <FormSelect label="Gender" fieldName="name" state={gender} setState={setGender} optionValues={["Male", "Female"]}/>
+        <FormText label="Address" fieldName="address" state={address} setState={setAddress}/>
+        <FormText label="Phone" fieldName="phone" state={phone} setState={setPhone}/>
+        
+        <button type="submit">
+          {buttonLabel}
+        </button>
+      </form>
       
-      <input type = "submit"
-        value = {
-            buttonLabel
-        }
-        className = "btn btn-blue" />
-
-      </div> 
-      </form> 
-      </div>
+    </div>
   );
 }
 export default ManageCustomer;

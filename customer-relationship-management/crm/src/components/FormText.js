@@ -1,14 +1,18 @@
 // TODO: define the relevant props to allow ManageCustomer to
 // connect with it
-function FormText(props) {
+function FormText({label, fieldName, state, setState}) {
+
+  const handleChange = (event) => {
+    setState(event.target.value);
+  };
+
   return (
     <div className="row">
-      <h1>FormText component</h1>
       <div className="col-25">
-        {/* TODO:Put in the label */}
+        <label>{label}: </label>
       </div>
       <div className="col-75">
-        {/* TODO: put in the textbox */}
+      <input type="text" name={fieldName} value={state} onChange={handleChange}/>
       </div>
     </div>
     );
