@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter as Router, } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import Sidebar from "./components/Sidebar";
  
@@ -25,7 +25,7 @@ import SearchCustomers from "./containers/SearchCustomers"
 function App() {
   return (
     <div>
-      <Router>
+      <BrowserRouter>
         <h1>Hello World</h1>
         <Sidebar />
         <div className="content-wrapper">
@@ -36,7 +36,7 @@ function App() {
             <Route path="/customers" element={<SearchCustomers />} />
           </Routes>
         </div>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }
