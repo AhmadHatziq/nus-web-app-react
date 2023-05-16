@@ -5,12 +5,11 @@ import Sidebar from "./components/Sidebar";
 import "./App.css";
 import ListCustomers from "./containers/ListCustomers";
 import ManageCustomer from "./containers/ManageCustomers";
-import SearchCustomers from "./containers/SearchCustomers"
  
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter forceRefresh> 
         <h1>Hello World</h1>
         <Sidebar />
         <div className="content-wrapper">
