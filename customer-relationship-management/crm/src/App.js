@@ -6,21 +6,6 @@ import "./App.css";
 import ListCustomers from "./containers/ListCustomers";
 import ManageCustomer from "./containers/ManageCustomers";
 import SearchCustomers from "./containers/SearchCustomers"
-
-/*
-  // Below is the final App component, when all the 4 components have been built (Sidebar, Home, ManageCustomer & SearchCustomers)
-    <div>
-      <Sidebar />
-      <div className="content-wrapper">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/new" element={<ManageCustomer />} />
-          <Route path="/view/:id" element={<ManageCustomer />} />
-          <Route path="/customers" element={<SearchCustomers />} />
-        </Routes>
-      </div>
-    </div>
-*/
  
 function App() {
   return (
@@ -33,7 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/new" element={<ManageCustomer />} />
             <Route path="/view/:id" element={<ManageCustomer />} />
-            <Route path="/customers" element={<SearchCustomers />} />
+            <Route path="/customers" element={<ListCustomers />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,42 +1,73 @@
-//import statements 
+// Import statements 
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
-function ListCustomers({data}) {
+function ListCustomers() {
 
-  //TODO: define state variables
+  // Define state variables
+  const [customers, setCustomers] = useState([]);
 
-  //used for navigating to other pages after adding/editing
-  //a record
+  // used for navigating to other pages after adding/editing
+  // a record
   const navigate = useNavigate();
 
-  //TODO: integrate with API
+  // Used to handle the Edit button being clicked
+  const editHandler = () => {
+    console.log("Edit button pressed")
+  }
+
+  // Used to handle the Delete button being clicked 
+  const deleteHandler = () => {
+    console.log("Delete button pressed")
+  }
+
+  // With useEffect, populate the customers from the backend. 
+  useEffect( () => {
+
+    const setCustomerData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/customers', {
+          method: 'GET'
+        })
+        const customerData = await response.json() 
+        console.log("Received customerData from backend: ", customerData)
+        setCustomers(customerData)
+      } catch (error) {
+        console.error('Error fetching data: ', error)
+      }
+    }
+    setCustomerData() 
+  }, [])
+
 
   //TODO: complete implementation
 
-  const rows = data.map( element => {
+  // For each customer, return a HTML row, <tr>, component. 
+  const rows = customers.map( element => {
       return ( 
         <tr key={element.id}>
-          <td>Item 1</td>
-          <td>Item 2</td>
-          <td>Item 3</td>
-          <td>Item 4</td>
-          <td>Item 5</td>
+          <td>{element.id}</td>
+          <td>{element.name}</td>
+          <td>{element.gender}</td>
+          <td>{element.address}</td>
+          <td>{element.phone}</td>
           <td>
-            <button className="btn btn-orange">
+            <button className="btn btn-orange" onClick={editHandler}>
               Edit
             </button>
-            <button className="btn btn-red">
+            <button className="btn btn-red" onClick={deleteHandler}>
               Delete
             </button>
           </td>
         </tr>
       );
   });
+
   return ( <>
     <div>
       <h1>ListCustomers component</h1>
       <div>
-        <input type="text" placeholder="Enter keywords"/>
+        <input type="text" placeholder="Enter search terms"/>
         <br/><br/>
       </div>
 
