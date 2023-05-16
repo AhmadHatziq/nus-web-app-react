@@ -93,7 +93,7 @@ function ListCustomers() {
 
   return ( <>
     <div>
-      <h1>ListCustomers component</h1>
+      <h1>Customer List</h1>
       <div>
         <input type="text" placeholder="Enter search terms" onChange={searchHandler} value={searchTerm}/>
         <br/><br/>
