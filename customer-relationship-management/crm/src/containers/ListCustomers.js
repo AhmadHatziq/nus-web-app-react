@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 function ListCustomers() {
 
   // Define state variables
-  const [customers, setCustomers] = useState([]);
+  const [allCustomers, setAllCustomers] = useState([])
+  const [shownCustomers, setShownCustomers] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
 
   // used for navigating to other pages after adding/editing
   // a record
@@ -21,6 +23,33 @@ function ListCustomers() {
     console.log("Delete button pressed")
   }
 
+  // Used to handle the search functionality 
+  const searchHandler = (event) => {
+
+    // Set search term 
+    event.preventDefault()
+    const searchValue = (event.target.value).toLowerCase() 
+    setSearchTerm(searchValue)
+
+    // Filter the customers with the search term. 
+    // Will search from the allCustomers state and set the value for shownCustomers 
+    
+    let matchingCustomers = []
+    for (let i = 0; i < allCustomers.length; i++) {
+      let customer = allCustomers[i]
+      let customerFields = `${customer.address} ${customer.gender} ${customer.name} ${customer.phone}`
+      if (customerFields.toLowerCase().includes(searchValue)){
+        matchingCustomers.push(customer)
+      }
+    }
+    console.log('Search term ', searchValue)
+    console.log('Matching customers: ', matchingCustomers)
+
+    // Set the customers to only the matching customers
+    setShownCustomers(matchingCustomers)
+    
+  }
+
   // With useEffect, populate the customers from the backend. 
   useEffect( () => {
 
@@ -31,7 +60,8 @@ function ListCustomers() {
         })
         const customerData = await response.json() 
         console.log("Received customerData from backend: ", customerData)
-        setCustomers(customerData)
+        setAllCustomers(customerData)
+        setShownCustomers(customerData)
       } catch (error) {
         console.error('Error fetching data: ', error)
       }
@@ -39,11 +69,9 @@ function ListCustomers() {
     setCustomerData() 
   }, [])
 
-
-  //TODO: complete implementation
-
   // For each customer, return a HTML row, <tr>, component. 
-  const rows = customers.map( element => {
+  // Only display the shownCustomers
+  const rows = shownCustomers.map( element => {
       return ( 
         <tr key={element.id}>
           <td>{element.id}</td>
@@ -67,7 +95,7 @@ function ListCustomers() {
     <div>
       <h1>ListCustomers component</h1>
       <div>
-        <input type="text" placeholder="Enter search terms"/>
+        <input type="text" placeholder="Enter search terms" onChange={searchHandler} value={searchTerm}/>
         <br/><br/>
       </div>
 
