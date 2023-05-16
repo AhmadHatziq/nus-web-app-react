@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3001/customers"
 
-// Does a POST request 
+// Creates a new customer with a POST request 
 // newCustomer is an object with the properties name, gender, address, phone 
 const createNewCustomer = async (newCustomer) => {
   const myHeaders = new Headers()
@@ -20,4 +20,13 @@ const createNewCustomer = async (newCustomer) => {
 
 }
 
-export { createNewCustomer }
+// Delete a customer with a DELETE request
+const deleteCustomer = async(customerId) => {
+  const deleteUrl = `${baseUrl}/${customerId}`
+  const response = await fetch(deleteUrl, {
+    method: 'DELETE'
+  })
+  return response 
+}
+
+export { createNewCustomer, deleteCustomer }

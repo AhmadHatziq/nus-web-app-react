@@ -13,62 +13,6 @@
       "address": "456 Alexandra Road S(119962)",
       "phone": "97654321",
       "id": 2
-    },
-    {
-      "name": "alred",
-      "gender": "Male",
-      "address": "Singapore",
-      "phone": "999",
-      "id": 3
-    },
-    {
-      "name": "Alice",
-      "gender": "Female",
-      "address": "232",
-      "phone": "2323",
-      "id": 4
-    },
-    {
-      "name": "new 001",
-      "gender": "Male",
-      "address": "new 001",
-      "phone": "new 001",
-      "id": 5
-    },
-    {
-      "name": "new 002",
-      "gender": "Male",
-      "address": "new 002",
-      "phone": "new 002",
-      "id": 6
-    },
-    {
-      "name": "new 003",
-      "gender": "Female",
-      "address": "new 003",
-      "phone": "new 003",
-      "id": 7
-    },
-    {
-      "name": "new 004",
-      "gender": "Female",
-      "address": "new 004",
-      "phone": "new 004",
-      "id": 8
-    },
-    {
-      "name": "new 005",
-      "gender": "Female",
-      "address": "new 005",
-      "phone": "new 005",
-      "id": 9
-    },
-    {
-      "name": "new 005",
-      "gender": "Male",
-      "address": "new 005",
-      "phone": "new 005",
-      "id": 10
     }
   ]
 }

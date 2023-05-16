@@ -1,6 +1,7 @@
 // Import statements 
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from 'react'
+import { deleteCustomer } from '../helpers/Api'
 
 function ListCustomers() {
 
@@ -14,13 +15,24 @@ function ListCustomers() {
   const navigate = useNavigate();
 
   // Used to handle the Edit button being clicked
-  const editHandler = () => {
+  const editHandler = (customer) => {
     console.log("Edit button pressed")
   }
 
   // Used to handle the Delete button being clicked 
-  const deleteHandler = () => {
-    console.log("Delete button pressed")
+  const deleteHandler = async (customer) => {
+    
+    const confirmed = window.confirm('Are you sure you want to delete?');
+    if (confirmed) {
+      
+      // Proceed with deleting by issuing a DELETE request to the backend 
+      const response = await deleteCustomer(customer.id)
+
+      // Redirect the user back to the list customers page 
+      alert(`Customer ${customer.name} has been deleted`)
+      navigate(0)
+  }
+
   }
 
   // Used to handle the search functionality 
@@ -42,8 +54,8 @@ function ListCustomers() {
         matchingCustomers.push(customer)
       }
     }
-    console.log('Search term ', searchValue)
-    console.log('Matching customers: ', matchingCustomers)
+    // console.log('Search term ', searchValue)
+    // console.log('Matching customers: ', matchingCustomers)
 
     // Set the customers to only the matching customers
     setShownCustomers(matchingCustomers)
@@ -59,7 +71,7 @@ function ListCustomers() {
           method: 'GET'
         })
         const customerData = await response.json() 
-        console.log("Received customerData from backend: ", customerData)
+        // console.log("Received customerData from backend: ", customerData)
         setAllCustomers(customerData)
         setShownCustomers(customerData)
       } catch (error) {
@@ -71,19 +83,19 @@ function ListCustomers() {
 
   // For each customer, return a HTML row, <tr>, component. 
   // Only display the shownCustomers
-  const rows = shownCustomers.map( element => {
+  const rows = shownCustomers.map( customer => {
       return ( 
-        <tr key={element.id}>
-          <td>{element.id}</td>
-          <td>{element.name}</td>
-          <td>{element.gender}</td>
-          <td>{element.address}</td>
-          <td>{element.phone}</td>
+        <tr key={customer.id}>
+          <td>{customer.id}</td>
+          <td>{customer.name}</td>
+          <td>{customer.gender}</td>
+          <td>{customer.address}</td>
+          <td>{customer.phone}</td>
           <td>
-            <button className="btn btn-orange" onClick={editHandler}>
+            <button className="btn btn-orange" onClick={() => editHandler(customer)}>
               Edit
             </button>
-            <button className="btn btn-red" onClick={deleteHandler}>
+            <button className="btn btn-red" onClick={() => deleteHandler(customer)}>
               Delete
             </button>
           </td>
