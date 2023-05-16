@@ -1,8 +1,8 @@
 
 function Home() {
   return (
-    <div className="sidebar">
-      <h1>Home component</h1>
+    <div>
+      <h1>Welcome to the Customer Relationship Manager app! </h1>
     </div>
   );
 }
