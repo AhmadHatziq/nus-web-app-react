@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-// import Home from "./components/Home";
-// import Sidebar from "./components/Sidebar";
+import Home from "./components/Home";
+import Sidebar from "./components/Sidebar";
  
 import "./App.css";
-// import SearchCustomers from "./containers/SearchCustomers";
-// import ManageCustomer from "./containers/ManageCustomer";
+import ListCustomers from "./containers/ListCustomers";
+import ManageCustomer from "./containers/ManageCustomers";
 
 /*
   // Below is the final App component, when all the 4 components have been built (Sidebar, Home, ManageCustomer & SearchCustomers)

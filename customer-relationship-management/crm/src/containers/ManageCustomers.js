@@ -1,4 +1,9 @@
 // import statements
+import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import FormText from '../components/FormText'
+import FormSelect from '../components/FormSelect'
 
 function ManageCustomer() {
 
@@ -43,6 +48,7 @@ function ManageCustomer() {
   }
   return ( 
     <div className = "form-container" >
+      <h1>ManageCustomer Component</h1>
       
       <form onSubmit = {
           handleAddEditAction

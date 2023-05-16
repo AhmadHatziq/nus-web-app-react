@@ -3,6 +3,7 @@
 function FormText(props) {
   return (
     <div className="row">
+      <h1>FormText component</h1>
       <div className="col-25">
         {/* TODO:Put in the label */}
       </div>

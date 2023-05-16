@@ -1,6 +1,7 @@
-//import statements
+//import statements 
+import { useNavigate } from "react-router-dom";
 
-function ListCustomers() {
+function ListCustomers({data}) {
 
   //TODO: define state variables
 
@@ -14,7 +15,7 @@ function ListCustomers() {
 
   const rows = data.map( element => {
       return ( 
-        <tr key={id}>
+        <tr key={element.id}>
           <td>Item 1</td>
           <td>Item 2</td>
           <td>Item 3</td>
@@ -33,6 +34,7 @@ function ListCustomers() {
   });
   return ( <>
     <div>
+      <h1>ListCustomers component</h1>
       <div>
         <input type="text" placeholder="Enter keywords"/>
         <br/><br/>
@@ -57,4 +59,4 @@ function ListCustomers() {
   </>
   );
 }
-export default SearchCustomers;
+export default ListCustomers;

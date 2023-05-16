@@ -3,7 +3,8 @@
 function FormSelect({
   inputValue_01,
   selectedValue,
-  onChange
+  onChange, 
+  selectData
 }) {
   //TODO: define the options for the <select></select>
   //think component-design (this FormSelect could
@@ -16,6 +17,7 @@ function FormSelect({
   });
   return ( 
     <div className = "row" >
+      <h1>FormSelect component</h1>
       <div className = "col-25" > {
           /* TODO:Put in the label */ } 
       </div> 
