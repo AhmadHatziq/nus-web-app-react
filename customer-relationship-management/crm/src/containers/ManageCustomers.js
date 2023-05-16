@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import FormText from '../components/FormText'
 import FormSelect from '../components/FormSelect'
-import { createNewCustomer } from '../helpers/Api'
-import { getSingleCustomer } from '../helpers/Api'
+import { getSingleCustomer, putExistingCustomer, createNewCustomer } from '../helpers/Api'
 
 function ManageCustomer() {
 
@@ -27,7 +26,11 @@ function ManageCustomer() {
 
   // useEffect is used to pre-populate the fields, when editing an existing customer, given the id param
   useEffect( () => {
-    if (id == 0) {
+    if (id === 0) {
+      setName("")
+      setGender("")
+      setAddress("")
+      setPhone("")
       return 
     }
 
@@ -103,7 +106,19 @@ function ManageCustomer() {
             
         } else {
 
-            // EDIT
+            // EDIT an existing customer 
+            const editedCustomer = {
+              name, gender, address, phone, id
+            }
+            const response = await putExistingCustomer(editedCustomer)
+
+            // If success, redirect user to the customer list 
+            if (response.ok) {
+              alert('Customer successfully edited')
+              navigate('/customers');
+            } else {
+              alert('Error in creating new customer. Please try again')
+            }
 
         }
     } //end if

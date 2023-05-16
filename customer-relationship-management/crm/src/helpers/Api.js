@@ -38,4 +38,25 @@ const getSingleCustomer = async(customerId) => {
   return response.json() 
 }
 
-export { createNewCustomer, deleteCustomer, getSingleCustomer }
+// PUT a customer
+const putExistingCustomer = async(customerObject) => {
+  const customerUrl = `${baseUrl}/${customerObject.id}`
+
+  const myHeaders = new Headers()
+  myHeaders.append("Content-Type", "application/json")
+  
+  const jsonObject = JSON.stringify(customerObject) 
+
+  const requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: jsonObject,
+    redirect: 'follow'
+  }
+
+  const response = await fetch(customerUrl, requestOptions)
+  return response
+
+}
+
+export { createNewCustomer, deleteCustomer, getSingleCustomer, putExistingCustomer }

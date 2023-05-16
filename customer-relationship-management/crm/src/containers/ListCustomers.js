@@ -16,7 +16,7 @@ function ListCustomers() {
 
   // Used to handle the Edit button being clicked
   const editHandler = (customer) => {
-    console.log("Edit button pressed")
+    navigate(`/view/${customer.id}`)
   }
 
   // Used to handle the Delete button being clicked 
