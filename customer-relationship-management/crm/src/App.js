@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+// import Home from "./components/Home";
+// import Sidebar from "./components/Sidebar";
+ 
+import "./App.css";
+// import SearchCustomers from "./containers/SearchCustomers";
+// import ManageCustomer from "./containers/ManageCustomer";
 
+/*
+  // Below is the final App component, when all the 4 components have been built (Sidebar, Home, ManageCustomer & SearchCustomers)
+    <div>
+      <Sidebar />
+      <div className="content-wrapper">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/new" element={<ManageCustomer />} />
+          <Route path="/view/:id" element={<ManageCustomer />} />
+          <Route path="/customers" element={<SearchCustomers />} />
+        </Routes>
+      </div>
+    </div>
+*/
+ 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello world</h1>
     </div>
   );
 }
-
+ 
 export default App;
