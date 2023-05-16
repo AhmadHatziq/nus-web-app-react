@@ -1,10 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter as Router, } from "react-router-dom";
 import Home from "./components/Home";
 import Sidebar from "./components/Sidebar";
  
 import "./App.css";
 import ListCustomers from "./containers/ListCustomers";
 import ManageCustomer from "./containers/ManageCustomers";
+import SearchCustomers from "./containers/SearchCustomers"
 
 /*
   // Below is the final App component, when all the 4 components have been built (Sidebar, Home, ManageCustomer & SearchCustomers)
@@ -24,7 +25,18 @@ import ManageCustomer from "./containers/ManageCustomers";
 function App() {
   return (
     <div>
-      <h1>Hello world</h1>
+      <Router>
+        <h1>Hello World</h1>
+        <Sidebar />
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/new" element={<ManageCustomer />} />
+            <Route path="/view/:id" element={<ManageCustomer />} />
+            <Route path="/customers" element={<SearchCustomers />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }
