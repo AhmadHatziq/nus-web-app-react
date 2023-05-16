@@ -1,9 +1,10 @@
 
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormText from '../components/FormText'
 import FormSelect from '../components/FormSelect'
 import { createNewCustomer } from '../helpers/Api'
+import { getSingleCustomer } from '../helpers/Api'
 
 function ManageCustomer() {
 
@@ -20,10 +21,35 @@ function ManageCustomer() {
   const [gender, setGender] = useState("")
   const [address, setAddress] = useState("")
   const [phone, setPhone] = useState("")
-  
 
   // define the buttonLabel
   const buttonLabel = id === 0 ? "Add" : "Edit";
+
+  // useEffect is used to pre-populate the fields, when editing an existing customer, given the id param
+  useEffect( () => {
+    if (id == 0) {
+      return 
+    }
+
+    // Do a GET request to obtain details regarding the specified user & set the form fields 
+    const setCustomerEditData = async(id) => {
+      try {
+        const customer = await getSingleCustomer(id)
+        // console.log("Received customerData from backend: ", customer)
+
+        setName(customer.name)
+        setGender(customer.gender)
+        setAddress(customer.address)
+        setPhone(customer.phone)
+
+      } catch (error) {
+        console.error('Error fetching data: ', error)
+      }
+    }
+
+    setCustomerEditData(id)
+
+  }, [])
 
   // Validates the input for each form field 
   function validate() {
@@ -77,7 +103,7 @@ function ManageCustomer() {
             
         } else {
 
-            // TODO: edit case
+            // EDIT
 
         }
     } //end if

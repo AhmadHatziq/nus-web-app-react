@@ -26,7 +26,7 @@ function ListCustomers() {
     if (confirmed) {
       
       // Proceed with deleting by issuing a DELETE request to the backend 
-      const response = await deleteCustomer(customer.id)
+      await deleteCustomer(customer.id)
 
       // Redirect the user back to the list customers page 
       alert(`Customer ${customer.name} has been deleted`)

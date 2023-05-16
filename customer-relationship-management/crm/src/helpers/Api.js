@@ -29,4 +29,13 @@ const deleteCustomer = async(customerId) => {
   return response 
 }
 
-export { createNewCustomer, deleteCustomer }
+// GET a customer, given the ID 
+const getSingleCustomer = async(customerId) => {
+  const customerUrl = `${baseUrl}/${customerId}`
+  const response = await fetch(customerUrl, {
+    method: 'GET'
+  })
+  return response.json() 
+}
+
+export { createNewCustomer, deleteCustomer, getSingleCustomer }
