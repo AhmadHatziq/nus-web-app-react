@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Get the CDN links from the React installation page -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    /*
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+    root.render(React.createElement("p", null, "Hello World"));
+    */
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+
+    function Profile(props) {
+      const containerStyle = {
+        border: "1px solid black",
+        width: "600px",
+        height: "200px",
+        padding: "10px",
+        borderRadius: "5px"
+      };
+
+      const imageContainerStyle = {
+        display: "absolute",
+        float: "left"
+      };
+
+      const imageStyle = {
+        width: "150px",
+        borderRadius: "50%",
+        background: "#ccc"
+      };
+
+      const descriptionContainerStyle = {
+        float: "left",
+        width: "400px",
+        fontFamily: "Arial, Helverica, sans-serif",
+        padding: "20px 10px"
+      };
+
+      return (
+        <div style={containerStyle}>
+          <div style={imageContainerStyle}>
+            <img style={imageStyle} src={props.person.avatar} alt="avatar" />
+          </div>
+
+          <div style={descriptionContainerStyle}>
+            <p>
+              {props.person.first_name} {props.person.last_name}
+            </p>
+            <p>{props.person.email}</p>
+            <p>{props.person.phone_number}</p>
+            <p>{props.person.date_of_birth}</p>
+            <p>
+              {props.person.employment.title} - {props.person.employment.key_skill}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+  // Data taken from https://random-data-api.com/api/v2/users?size=3
+  const people = [
+    {
+      id: 1193,
+      first_name: "Coletta",
+      last_name: "Spinka",
+      email: "coletta.spinka@email.com",
+      avatar: "https://robohash.org/voluptatemillumsunt.png?size=300x300",
+      phone_number: "+351 1-215-083-8787 x1674",
+      date_of_birth: "1982-04-19",
+      employment: {
+        title: "Product Design Officer",
+        key_skill: "Teamwork"
+      }
+    },
+    {
+      id: 7268,
+      first_name: "Jimmie",
+      last_name: "D'Amore",
+      email: "jimmie.d'amore@email.com",
+      avatar: "https://robohash.org/voluptatemillumsunt.png?size=300x300",
+      phone_number: "+249 (156) 785-4858 x9393",
+      date_of_birth: "1980-12-21",
+      employment: {
+        title: "Healthcare Developer",
+        key_skill: "Self-motivated"
+      }
+    },
+    {
+      id: 6238,
+      first_name: "Jackeline",
+      last_name: "Kautzer",
+      email: "jackeline.kautzer@email.com",
+      avatar: "https://robohash.org/voluptatemillumsunt.png?size=300x300",
+      phone_number: "+506 307.291.8181 x6275",
+      date_of_birth: "1991-06-05",
+      employment: {
+        title: "Product Government Architect",
+        key_skill: "Networking skills"
+      }
+    }
+  ];
+
+  const data = people.map((item) => {
+    return <Profile person={item} />;
+  });
+
+    root.render(
+      <div>{data}</div>
+    );
+  </script>
+</body>
+
+</html>
