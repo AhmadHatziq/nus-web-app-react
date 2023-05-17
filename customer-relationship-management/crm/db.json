@@ -20,6 +20,20 @@
       "address": "Pasir Ri$",
       "phone": "283092813123EDQW",
       "id": 3
+    },
+    {
+      "name": "John",
+      "gender": "Female",
+      "address": "Halo",
+      "phone": "118",
+      "id": 4
+    },
+    {
+      "name": "Ashley 2",
+      "gender": "Male",
+      "address": "Woodlands",
+      "phone": "999",
+      "id": 5
     }
   ]
 }
